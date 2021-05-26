@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "../routes/axios";
 
+const base_url = "https://image.tmdb.org/t/p/original";
+
 const Row = ({ title, fetchURL }) => {
     const [movies, setMovies] = useState([]);
 
@@ -9,7 +11,7 @@ const Row = ({ title, fetchURL }) => {
         const fetchData = async () => {
             const request = await axios.get(fetchURL);
 
-            setMovies(request.data.result);
+            setMovies(request.data.results);
             return request;
         };
 
@@ -17,8 +19,20 @@ const Row = ({ title, fetchURL }) => {
     }, [fetchURL]);
 
     return (
-        <div>
+        <div className="row">
             <h2>{title}</h2>
+
+            <div className="row__posters">
+                {movies.map((movie) => {
+                    return (
+                        <img
+                            key={movie.id}
+                            src={`${base_url}${movie.poster_path}`}
+                            alt={movie.name}
+                        />
+                    );
+                })}
+            </div>
         </div>
     );
 };
