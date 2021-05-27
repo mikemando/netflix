@@ -1,14 +1,16 @@
 import Row from "./components/Row";
 import request from "./routes/request";
+import Banner from "./components/Banner";
 import "./App.css";
 
-function App() {
+const App = () => {
     return (
         <div className="App">
-            <h1>Hello there. Netflix and chill ...</h1>
+            <Banner />
             <Row
                 title="NETFLIX ORIGINALS"
                 fetchURL={request.fetchNetflixOriginals}
+                isLargeRow
             />
             <Row title="Trending Now" fetchURL={request.fetchTrending} />
             <Row title="Top Rated" fetchURL={request.fetchTopRated} />
@@ -19,6 +21,6 @@ function App() {
             <Row title="Documentaries" fetchURL={request.fetchDocumentaries} />
         </div>
     );
-}
+};
 
 export default App;
